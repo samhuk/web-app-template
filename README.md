@@ -1,6 +1,6 @@
 # TREE Starter
 
-A starter for a react-redux web application.
+A starter for a react-redux & expressjs web application.
 
 * Typescript, 100%
 * React (with Redux)
