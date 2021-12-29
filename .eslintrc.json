@@ -1,0 +1,68 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": "./tsconfig/eslint.json",
+    "tsconfigRootDir": "./"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx", ".js", ".jsx", ".scss"]
+      }
+    }
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "semi": "off",
+    "import/extensions": "off",
+    "radix": "off",
+    "object-curly-newline": [1, {
+      "ObjectExpression": {
+        "multiline": true
+      },
+      "ObjectPattern": {
+        "multiline": true
+      },
+      "ImportDeclaration": "never",
+      "ExportDeclaration": {
+        "multiline": true
+      }
+    }],
+    "nonblock-statement-body-position": ["error", "any"],
+    "curly": ["error", "multi-or-nest", "consistent"],
+    "max-len": [2, 150],
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "arrow-parens": [2, "as-needed"],
+    "no-return-assign": [0],
+    "react/destructuring-assignment": [0],
+    "brace-style": [2, "stroustrup"],
+    "no-underscore-dangle": [0],
+    "no-nested-ternary": [0],
+    "react/jsx-one-expression-per-line": "off",
+    "import/prefer-default-export": "warn",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error"
+  }
+}
