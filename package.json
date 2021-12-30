@@ -13,10 +13,12 @@
     "run-build-server-dev": "env-cmd -e dev node ./buildScripts/build/buildServerScript.js",
     "build-dev": "npm run build-build && npm run run-build-dev",
     "build-prod": "npm run build-build && npm run run-build-prod",
+    "start-server-dev": "env-cmd -e dev node ./build/server/out.js",
+    "start-server-prod": "env-cmd -e prod node ./build/server/out.js",
     "watch-client-dev": "env-cmd -e dev nodemon --watch ./src/client --watch ./src/common --ext \"ts,tsx,json\" --exec \"npm run run-build-client-dev\"",
-    "watch-server-dev": "env-cmd -e dev nodemon --watch ./src/server --watch ./src/common --ext \"ts,tsx,json\" --exec \"npm run run-build-server-dev && node ./build/server/out.js\"",
+    "watch-server-dev": "env-cmd -e dev nodemon --watch ./src/server --watch ./src/common --ext \"ts,tsx,json\" --exec \"npm run run-build-server-dev && npm run start-server-dev\"",
     "start": "npm run build-build && concurrently -n \"ui ,api\" -c \"cyan,blue\" \"npm run watch-client-dev\" \"npm run watch-server-dev\"",
-    "start-prod": "env-cmd -e prod node ./build/server/out.js"
+    "start-prod": "npm run build-prod && npm run start-server-prod"
   },
   "author": "",
   "license": "MIT",

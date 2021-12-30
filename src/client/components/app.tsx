@@ -9,7 +9,7 @@ import '../assets/styles/standard.scss'
 
 export const App = () => (
   <>
-    <Header title="trew-starter" />
+    <Header title="TREE Starter" />
     <Body />
   </>
 )

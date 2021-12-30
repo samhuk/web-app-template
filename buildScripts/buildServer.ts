@@ -15,7 +15,7 @@ export const buildServer = () => {
     entryPoints: [ENTRYPOINT_PATH],
     outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
     bundle: true,
-    minify: false, // Doesn't work for some reason when it's true.
+    minify: prod,
     sourcemap: !prod,
     metafile: true,
     platform: 'node',

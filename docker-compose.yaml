@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  client:
+    container_name: client
+    build:
+      context: ./src/client
+    ports:
+    - "8080:80"
+  api:
+    container_name: api
+    user: node
+    build:
+      context: ./src/server
+    environment:
+      - SERVER_PORT=80
+      - NODE_ENV=production
+    ports:
+    - "4000:80"

@@ -7,6 +7,7 @@ import { createIndexHtmlFileText } from './esbuildHtmlFilePlugin'
 
 const prod = process.env.NODE_ENV === 'production'
 const INDEX_HTML_FILE_PATH = './src/client/index.html'
+const FAVICON_FILE_PATH = './src/client/favicon.ico'
 const ENTRYPOINT_PATH = './src/client/main.tsx'
 const OUTPUT_DIR = './build/client'
 const OUTPUT_JS_FILENAME = 'out.js'
@@ -28,7 +29,9 @@ export const buildClient = () => {
   .then((result) => {
     const indexHtmlFileText = createIndexHtmlFileText(result, INDEX_HTML_FILE_PATH, OUTPUT_DIR)
     printBuildResult(result, Buffer.from(indexHtmlFileText).length, indexHtmlFileOutputPath)
+    // Write non-typescript/css related files to build dir
     fs.writeFileSync(indexHtmlFileOutputPath, indexHtmlFileText)
+    fs.copyFileSync(FAVICON_FILE_PATH, path.relative(path.resolve('./'), path.resolve(OUTPUT_DIR, 'favicon.ico')))
     console.log(`    dt: ${(Date.now() - startTime) / 1000} s`)
     return
   })
