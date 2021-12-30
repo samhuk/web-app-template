@@ -2,10 +2,12 @@
 
 A starter for a react-redux & expressjs web application.
 
+Notable technologies used:
 * Typescript, 100%
 * React (with Redux)
 * ExpressJS
 * ESBuild
+* SCSS
 
 ## Development
 
