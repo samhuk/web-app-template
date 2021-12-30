@@ -1,5 +1,8 @@
 # TREE Starter
 
+![build](https://github.com/samhuk/tree-starter/actions/workflows/build.yml/badge.svg)
+![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
+
 A starter for a react-redux & expressjs web application.
 
 Notable technologies used:
@@ -9,18 +12,28 @@ Notable technologies used:
 * ESBuild
 * SCSS
 
-## Development
+Notable features:
+* Hot reloading (using livereload)
+* Development and production modes
 
-Run `npm start` to start the ExpressJS server, hosting the api endpoints and serving the client files.
+## Development Deployment
+
+One must have node and npm installed. Get node from [nodejs.org](https://nodejs.org/en/download/).
+
+Run `npm install`
+
+Run `npm start`
+
+Try navigating to localhost:4001.
 
 ## Production Deployment
 
-One must have docker installed to deploy the application in production mode.
+One must have node, npm, and docker installed to deploy the application in production mode. Get docker from [docker.com](https://docs.docker.com/get-docker/).
 
-run `sh build-prod.sh`
+Run `npm install`
 
-This will build the docker images for the client and the API
+Run `sh build-prod.sh`
 
-run `sh start-prod.sh`
+Run `sh start-prod.sh`
 
-This will run the client and API docker images. Try navigating to localhost:8080.
+Try navigating to localhost:8080.
