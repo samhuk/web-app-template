@@ -2,6 +2,9 @@ import { BuildResult } from 'esbuild'
 import prettyBytes from 'pretty-bytes'
 import * as path from 'path'
 
+/**
+ * Prints the result of the given esbuild result to console.
+ */
 export const printBuildResult = (result: BuildResult, indexHtmlFileSizeBytes?: number, indexHtmlFileOutputPath?: string) => {
   const inputFileCount = Object.keys(result.metafile.inputs).length
   const totalInputFileSizeBytes = Object.values(result.metafile.inputs).reduce((acc, input) => acc += input.bytes, 0)

@@ -4,7 +4,9 @@ import { BuildResult } from 'esbuild'
 import { JSDOM } from 'jsdom'
 
 /**
- * Rudimentary copy of HtmlPlugin (of webpack)
+ * Rudimentary copy of the HtmlPlugin of webpack. Creates a HTML file for the given
+ * build result and html index file, adding <script> and <link> elements to reference
+ * the output js and css bundles.
  */
 export const createIndexHtmlFileText = (result: BuildResult, indexHtmlFilePath: string, outputDir: string): string => {
   const htmlFileText = fs.readFileSync(indexHtmlFilePath, { encoding: 'utf8' })
