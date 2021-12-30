@@ -1,6 +1,6 @@
 # TREE Starter
 
-![build](https://github.com/samhuk/tree-starter/actions/workflows/build.yml/badge.svg)
+![build](https://github.com/samhuk/tree-starter/actions/workflows/build.yaml/badge.svg)
 ![MIT License](https://img.shields.io/badge/License-MIT-green.svg)
 
 A starter for a react-redux & expressjs web application.
