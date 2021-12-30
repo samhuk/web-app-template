@@ -32,8 +32,10 @@ One must have node, npm, and docker installed to deploy the application in produ
 
 Run `npm install`
 
-Run `sh build-prod.sh`
+Run `sh build-prod.sh` (or `./build-prod.bat` if on Windows)
 
-Run `sh start-prod.sh`
+Run `docker-compose up -d`
 
 Try navigating to localhost:8080.
+
+To stop the app, run `docker-compose down`
