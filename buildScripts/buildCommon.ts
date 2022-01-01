@@ -2,10 +2,15 @@ import { BuildResult } from 'esbuild'
 import prettyBytes from 'pretty-bytes'
 import * as path from 'path'
 
+export type BuildOutput = {
+  path: string
+  sizeBytes: number
+}
+
 /**
  * Prints the result of the given esbuild result to console.
  */
-export const printBuildResult = (result: BuildResult, indexHtmlFileSizeBytes?: number, indexHtmlFileOutputPath?: string) => {
+export const printBuildResult = (result: BuildResult, additionalOutputs?: BuildOutput[]) => {
   const inputFileCount = Object.keys(result.metafile.inputs).length
   const totalInputFileSizeBytes = Object.values(result.metafile.inputs).reduce((acc, input) => acc += input.bytes, 0)
   const totalOutputFileSizeBytes = Object.values(result.metafile.outputs).reduce((acc, output) => acc += output.bytes, 0)
@@ -15,9 +20,22 @@ export const printBuildResult = (result: BuildResult, indexHtmlFileSizeBytes?: n
   // Print output data
   console.log('  Outputs:')
   Object.entries(result.metafile.outputs).forEach(([filename, output]) => console.log(`    ${filename} [${prettyBytes(output.bytes)}]`))
-  if (indexHtmlFileSizeBytes != null)
-    console.log(`    ${path.relative(path.resolve('./'), indexHtmlFileOutputPath)} [${prettyBytes(indexHtmlFileSizeBytes)}]`)
+  additionalOutputs?.forEach(o => console.log(`    ${path.relative(path.resolve('./'), o.path)} [${prettyBytes(o.sizeBytes)}]`))
   // Metrics
   console.log('  Metrics:')
   console.log(`    Compression ratio: ${(totalInputFileSizeBytes / totalOutputFileSizeBytes).toFixed(2)}`)
+}
+
+export const createBuilder = (buildName: string, fn: () => Promise<any>) => () => {
+  console.log(`Building ${buildName}...`)
+  const startTime = Date.now()
+  return fn()
+    .then(() => {
+      console.log(`    dt: ${(Date.now() - startTime) / 1000} s`)
+      return
+    })
+    .catch((err) => {
+      console.log(err)
+      return
+    })
 }

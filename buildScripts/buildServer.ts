@@ -1,36 +1,28 @@
 import * as esbuild from 'esbuild'
 import sassPlugin from 'esbuild-sass-plugin'
 import * as path from 'path'
-import { printBuildResult } from './buildCommon'
+import { createBuilder, printBuildResult } from './buildCommon'
 
 const prod = process.env.NODE_ENV === 'production'
 const ENTRYPOINT_PATH = './src/server/app.ts'
 const OUTPUT_DIR = './build/server'
 const OUTPUT_JS_FILENAME = 'out.js'
 
-const startTime = Date.now()
-export const buildServer = () => {
-  console.log('Building server...')
-  return esbuild.build({
-    entryPoints: [ENTRYPOINT_PATH],
-    outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
-    bundle: true,
-    minify: prod,
-    sourcemap: !prod,
-    metafile: true,
-    platform: 'node',
-    external: ['livereload-js'],
-    plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
-  })
-  .then((result) => {
-    printBuildResult(result)
-    console.log(`    dt: ${(Date.now() - startTime) / 1000} s`)
-    return
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
+export const buildServer = createBuilder('server', () => esbuild.build({
+  entryPoints: [ENTRYPOINT_PATH],
+  outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
+  bundle: true,
+  minify: prod,
+  sourcemap: !prod,
+  metafile: true,
+  platform: 'node',
+  external: ['livereload-js'],
+  plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
+})
+.then((result) => {
+  printBuildResult(result)
+  return
+}))
 
 const nativeNodeModulesPlugin = {
   name: 'native-node-modules',

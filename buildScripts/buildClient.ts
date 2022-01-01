@@ -2,7 +2,7 @@ import * as esbuild from 'esbuild'
 import sassPlugin from 'esbuild-sass-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
-import { printBuildResult } from './buildCommon'
+import { createBuilder, printBuildResult } from './buildCommon'
 import { createIndexHtmlFileText } from './esbuildHtmlFilePlugin'
 
 const prod = process.env.NODE_ENV === 'production'
@@ -13,29 +13,26 @@ const OUTPUT_DIR = './build/client'
 const OUTPUT_JS_FILENAME = 'out.js'
 
 const indexHtmlFileOutputPath = path.relative(path.resolve('./'), path.resolve(OUTPUT_DIR, 'index.html'))
+const faviconFileOutputPath = path.relative(path.resolve('./'), path.resolve(OUTPUT_DIR, 'favicon.ico'))
 
-export const buildClient = () => {
-  console.log('Building client...')
-  const startTime = Date.now()
-  return esbuild.build({
-    entryPoints: [ENTRYPOINT_PATH],
-    outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
-    bundle: true,
-    minify: prod,
-    sourcemap: !prod,
-    metafile: true,
-    plugins: [sassPlugin() as unknown as esbuild.Plugin],
-  })
-  .then((result) => {
-    const indexHtmlFileText = createIndexHtmlFileText(result, INDEX_HTML_FILE_PATH, OUTPUT_DIR)
-    printBuildResult(result, Buffer.from(indexHtmlFileText).length, indexHtmlFileOutputPath)
-    // Write non-typescript/css related files to build dir
-    fs.writeFileSync(indexHtmlFileOutputPath, indexHtmlFileText)
-    fs.copyFileSync(FAVICON_FILE_PATH, path.relative(path.resolve('./'), path.resolve(OUTPUT_DIR, 'favicon.ico')))
-    console.log(`    dt: ${(Date.now() - startTime) / 1000} s`)
-    return
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
+export const buildClient = createBuilder('client', () => esbuild.build({
+  entryPoints: [ENTRYPOINT_PATH],
+  outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
+  bundle: true,
+  minify: prod,
+  sourcemap: !prod,
+  metafile: true,
+  plugins: [sassPlugin() as unknown as esbuild.Plugin],
+})
+.then((result) => {
+  // Create index.html file, referencing build outputs
+  const indexHtmlFileText = createIndexHtmlFileText(result, INDEX_HTML_FILE_PATH, OUTPUT_DIR)
+  // Copy over additional related files to build dir
+  fs.writeFileSync(indexHtmlFileOutputPath, indexHtmlFileText)
+  fs.copyFileSync(FAVICON_FILE_PATH, faviconFileOutputPath)
+  printBuildResult(result, [
+    { path: indexHtmlFileOutputPath, sizeBytes: Buffer.from(indexHtmlFileText).length },
+    { path: faviconFileOutputPath, sizeBytes: fs.statSync(FAVICON_FILE_PATH).size }
+  ])
+  return
+}))
