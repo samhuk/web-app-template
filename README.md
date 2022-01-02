@@ -21,7 +21,7 @@ Notable features:
 
 One must have node and npm installed. Get node from [nodejs.org](https://nodejs.org/en/download/).
 
-Run `npm install`
+Run `npm i`
 
 Run `npm start`
 
@@ -29,9 +29,9 @@ Try navigating to localhost:4001.
 
 ## Production Deployment
 
-One must have node, npm, and docker installed to deploy the application in production mode. Get docker from [docker.com](https://docs.docker.com/get-docker/).
+One must have node, npm, docker, and go installed to deploy the application in production mode. Get docker from [docker.com](https://docs.docker.com/get-docker/). Get go from [go.dev](https://go.dev/doc/install).
 
-Run `npm install`
+Run `npm i`
 
 Run `sh build-prod.sh` (or `./build-prod.bat` if on Windows)
 
