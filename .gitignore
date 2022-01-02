@@ -5,4 +5,4 @@ buildScripts/build
 **/*webpack/*.js
 src/test/e2e/cypress/videos/**/*
 debug.log
-gzipper
+buildScripts/gzipper
