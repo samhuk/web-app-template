@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf ./build && rimraf ./buildScripts/build",
-    "build-build": "npm run clean && tsc -p ./buildScripts/tsconfig.json",
+    "build-build": "npm run clean && tsc -p ./buildScripts/tsconfig.json && go build ./buildScripts/gzipper.go",
     "run-build-dev": "env-cmd -e dev node ./buildScripts/build/build.js",
     "run-build-prod": "env-cmd -e prod node ./buildScripts/build/build.js",
     "run-build-client-dev": "env-cmd -e dev node ./buildScripts/build/buildClientScript.js",
