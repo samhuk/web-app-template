@@ -15,6 +15,7 @@ Notable technologies used:
 Notable features:
 * Hot reloading (using livereload)
 * Development and production modes
+* Gzip in production mode
 
 ## Development Deployment
 
