@@ -33,7 +33,7 @@ One must have node, npm, docker, and go installed to deploy the application in p
 
 Run `npm i`
 
-Run `sh build-prod.sh` (or `./build-prod.bat` if on Windows)
+Run `sh build-prod.sh` (or `build-prod.bat` if on Windows)
 
 Run `docker-compose up -d`
 

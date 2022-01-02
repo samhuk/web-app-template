@@ -6,3 +6,4 @@ buildScripts/build
 src/test/e2e/cypress/videos/**/*
 debug.log
 buildScripts/gzipper
+buildScripts/gzipper.exe
