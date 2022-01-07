@@ -11,11 +11,14 @@ Notable technologies used:
 * ExpressJS
 * ESBuild
 * SCSS
+* Docker
+* Go
+* NGINX
 
 Notable features:
-* Hot reloading (using livereload)
-* Development and production modes
-* Gzip in production mode
+* Ultra fast hot reloading
+* Development and production modes (prod using Docker)
+* Gzip enabled in production mode
 
 ## Development Deployment
 
