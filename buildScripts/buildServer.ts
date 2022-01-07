@@ -1,7 +1,7 @@
 import * as esbuild from 'esbuild'
 import sassPlugin from 'esbuild-sass-plugin'
 import * as path from 'path'
-import { createBuilder, printBuildResult } from './buildCommon'
+import { createBuilder } from './buildCommon'
 
 const prod = process.env.NODE_ENV === 'production'
 const ENTRYPOINT_PATH = './src/server/app.ts'
@@ -15,14 +15,12 @@ export const buildServer = createBuilder('server', () => esbuild.build({
   minify: prod,
   sourcemap: !prod,
   metafile: true,
+  incremental: !prod,
   platform: 'node',
   external: ['livereload-js'],
   plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
 })
-.then((result) => {
-  printBuildResult(result)
-  return
-}))
+.then((result) => ({ buildResult: result })))
 
 const nativeNodeModulesPlugin = {
   name: 'native-node-modules',

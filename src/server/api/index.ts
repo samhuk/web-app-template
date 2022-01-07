@@ -1,17 +1,11 @@
 import cors from 'cors'
 import { json, Router } from 'express'
 
-const contactExternalService = (onComplete: () => void) => {
-  setTimeout(() => {
-    onComplete()
-  }, 2000)
-}
-
 const router = Router()
   .use(cors())
   .use(json())
-  .use('/asyncTest', (req, res) => {
-    contactExternalService(() => res.send('async test response!'))
+  .use('/healthcheck', (req, res) => {
+    res.sendStatus(200)
   })
 
 export default router

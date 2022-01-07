@@ -73,4 +73,4 @@ if (!prod) {
 }
 
 const port = getPort()
-app.listen(port, '0.0.0.0', () => console.log(`Started. Listening on port ${port}.`))
+app.listen(port, '0.0.0.0', () => console.log(`API started. Listening on port ${port}.`))

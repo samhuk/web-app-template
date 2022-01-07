@@ -2,7 +2,7 @@ import * as esbuild from 'esbuild'
 import sassPlugin from 'esbuild-sass-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
-import { createBuilder, printBuildResult } from './buildCommon'
+import { createBuilder } from './buildCommon'
 import { createIndexHtmlFileText } from './esbuildHtmlFilePlugin'
 
 const prod = process.env.NODE_ENV === 'production'
@@ -22,6 +22,7 @@ export const buildClient = createBuilder('client', () => esbuild.build({
   minify: prod,
   sourcemap: !prod,
   metafile: true,
+  incremental: !prod,
   plugins: [sassPlugin() as unknown as esbuild.Plugin],
 })
 .then((result) => {
@@ -30,9 +31,11 @@ export const buildClient = createBuilder('client', () => esbuild.build({
   // Copy over additional related files to build dir
   fs.writeFileSync(indexHtmlFileOutputPath, indexHtmlFileText)
   fs.copyFileSync(FAVICON_FILE_PATH, faviconFileOutputPath)
-  printBuildResult(result, [
-    { path: indexHtmlFileOutputPath, sizeBytes: Buffer.from(indexHtmlFileText).length },
-    { path: faviconFileOutputPath, sizeBytes: fs.statSync(FAVICON_FILE_PATH).size }
-  ])
-  return
+  return {
+    buildResult: result,
+    additionalOutputs: [
+      { path: indexHtmlFileOutputPath, sizeBytes: Buffer.from(indexHtmlFileText).length },
+      { path: faviconFileOutputPath, sizeBytes: fs.statSync(FAVICON_FILE_PATH).size },
+    ],
+  }
 }))
