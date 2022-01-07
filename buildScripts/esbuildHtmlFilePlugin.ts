@@ -9,7 +9,14 @@ import { JSDOM } from 'jsdom'
  * the output js and css bundles.
  */
 export const createIndexHtmlFileText = (result: BuildResult, indexHtmlFilePath: string, outputDir: string): string => {
-  const htmlFileText = fs.readFileSync(indexHtmlFilePath, { encoding: 'utf8' })
+  let htmlFileText: string = null;
+  try {
+    htmlFileText = fs.readFileSync(indexHtmlFilePath, { encoding: 'utf8' })
+  }
+  catch (e) {
+    console.log('ERROR: Could not access index.html file.', e)
+    return '';
+  }
   const jsdom = new JSDOM(htmlFileText)
   const document = jsdom.window.document
 

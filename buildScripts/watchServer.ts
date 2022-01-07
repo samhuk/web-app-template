@@ -14,17 +14,19 @@ buildServer().then((result) => {
   const watcher = chokidar.watch(['./src/server', './src/common'])
   // Being watching for server code changes
   watcher.on('ready', () => {
+    console.log('Watching for changes...');
     watcher.on('all', (a) => {
       // Kill existing server process
       serverProc?.kill()
-      stdout.write(`Changes detected [${new Date().toLocaleTimeString()}], rebuilding server...`)
+      console.log(`Changes detected [${new Date().toLocaleTimeString()}], rebuilding server...`)
       const startTime = Date.now()
       // Rebuild server
       result.buildResult.rebuild().then((result) => {
-        stdout.write(`Done.\n`)
+        console.log(`Done.`)
         printBuildResult(result, startTime)
         // Start server again
         startServer()
+        console.log('Watching for changes...');
       });
     })
   })
