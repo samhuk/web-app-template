@@ -11,7 +11,7 @@ type Config = {
 export const config: Config = {
   navItems: [
     { to: '/', text: 'Home', exact: true },
-    { to: '/orders', text: 'Orders' },
+    { to: '/links', text: 'Links' },
   ],
 }
 

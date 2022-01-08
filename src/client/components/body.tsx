@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Nav from './nav'
+import Home from './home'
+import Links from './links'
 
 export const render = () => (
   <Router>
@@ -8,8 +10,8 @@ export const render = () => (
       <div className="body">
         <Nav />
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/orders" element={<h1>Orders</h1>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/links" element={<Links />} />
         </Routes>
       </div>
     </div>

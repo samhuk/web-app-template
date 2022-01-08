@@ -8,7 +8,7 @@ $primary-text-color: #eee;
 $standard-border: 1px solid $secondary-color;
 
 // Font
-$font-family: Arial, Geneva, Helvetica, sans-serif;
+$font-family: 'Roboto', sans-serif;
 
 html {
   height: 100vh;
@@ -23,11 +23,66 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#app {
-  height: 100%;
-  width: 100%;
+#root {
+  height: 500px;
+  width: 500px;
+}
+
+.header {
+  font-size: 42px;
+  text-align: center;
+}
+
+.nav {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .nav-item-wrapper {
+    list-style: none;
+
+    .nav-item {
+      text-decoration: none;
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      border-radius: 5px;
+
+      &.is-active {
+        background-color: #ccc;
+      }
+    }
+  }
+}
+
+.home {
+  text-align: center;
+}
+
+.links {
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .name-cell {
+    font-weight: bold;
+  }
+
+  .links-cell {
+    width: 100%;
+  }
 }
