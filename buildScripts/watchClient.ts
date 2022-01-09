@@ -17,6 +17,9 @@ buildClient().then((result) => {
         console.log(`Done.`)
         printBuildResult(result, startTime)
         console.log('Watching for changes...')
+      }).catch((err) =>
+      {
+        console.log('BUILD ERROR: ', err)
       });
     })
   })
