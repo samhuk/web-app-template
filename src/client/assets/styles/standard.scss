@@ -1,6 +1,6 @@
 // Colors
 $primary-color: cyan;
-$secondary-color: #aaa;
+$secondary-color: #666;
 $primary-background: #222;
 $primary-text-color: #ddd;
 
@@ -62,12 +62,13 @@ body {
 
     .nav-item {
       text-decoration: none;
-      border: 1px solid #ccc;
+      border: $standard-border;
       padding: 5px 10px;
       border-radius: 5px;
 
       &.is-active {
         background-color: lighten($primary-background, 5);
+        border-color: lighten($secondary-color, 10);
       }
     }
   }
@@ -91,10 +92,10 @@ body {
   }
 
   tr {
-    border-bottom: 1px solid #ccc;
+    border-bottom: $standard-border;
 
     &:first-child {
-      border-top: 1px solid #ccc;
+      border-top: $standard-border;
     }
   }
 
