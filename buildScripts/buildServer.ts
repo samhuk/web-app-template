@@ -8,24 +8,10 @@ const ENTRYPOINT_PATH = './src/server/app.ts'
 const OUTPUT_DIR = './build/server'
 const OUTPUT_JS_FILENAME = 'out.js'
 
-export const buildServer = createBuilder('server', () => esbuild.build({
-  entryPoints: [ENTRYPOINT_PATH],
-  outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
-  bundle: true,
-  minify: prod,
-  sourcemap: !prod,
-  metafile: true,
-  incremental: !prod,
-  platform: 'node',
-  external: ['livereload-js'],
-  plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
-})
-.then((result) => ({ buildResult: result })))
-
 const nativeNodeModulesPlugin = {
   name: 'native-node-modules',
   setup(build: any) {
-    // If a ".node" file is imported within a module in the "file" namespace, resolve 
+    // If a ".node" file is imported within a module in the "file" namespace, resolve
     // it to an absolute path and put it into the "node-file" virtual namespace.
     build.onResolve({ filter: /\.node$/, namespace: 'file' }, (args: any) => ({
       path: require.resolve(args.path, { paths: [args.resolveDir] }),
@@ -52,8 +38,21 @@ const nativeNodeModulesPlugin = {
 
     // Tell esbuild's default loading behavior to use the "file" loader for
     // these ".node" files.
-    let opts = build.initialOptions
+    const opts = build.initialOptions
     opts.loader = opts.loader || {}
     opts.loader['.node'] = 'file'
   },
 }
+
+export const buildServer = createBuilder('server', () => esbuild.build({
+  entryPoints: [ENTRYPOINT_PATH],
+  outfile: path.resolve(OUTPUT_DIR, OUTPUT_JS_FILENAME),
+  bundle: true,
+  minify: prod,
+  sourcemap: !prod,
+  metafile: true,
+  incremental: !prod,
+  platform: 'node',
+  external: ['livereload-js'],
+  plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
+}).then(result => ({ buildResult: result })))

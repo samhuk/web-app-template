@@ -24,8 +24,7 @@ export const buildClient = createBuilder('client', () => esbuild.build({
   metafile: true,
   incremental: !prod,
   plugins: [sassPlugin() as unknown as esbuild.Plugin],
-})
-.then((result) => {
+}).then(result => {
   // Create index.html file, referencing build outputs
   const indexHtmlFileText = createIndexHtmlFileText(result, INDEX_HTML_FILE_PATH, OUTPUT_DIR)
   // Copy over additional related files to build dir

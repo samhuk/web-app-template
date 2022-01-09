@@ -30,6 +30,7 @@
   },
   "rules": {
     "semi": [2, "never"],
+    "prefer-destructuring": "off",
     "import/extensions": "off",
     "radix": "off",
     "object-curly-newline": [1, {
@@ -65,7 +66,7 @@
     "no-underscore-dangle": [0],
     "no-nested-ternary": [0],
     "react/jsx-one-expression-per-line": "off",
-    "import/prefer-default-export": "warn",
+    "import/prefer-default-export": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "no-shadow": "off",
