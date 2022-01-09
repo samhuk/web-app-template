@@ -5,7 +5,7 @@ type Props = {
 }
 
 export const Header = ({ title }: Props) => (
-  <div className="header">{title}</div>
+  <div className="header">🌳 {title}</div>
 )
 
 export default Header

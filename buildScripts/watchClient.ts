@@ -2,10 +2,12 @@ import chokidar from 'chokidar'
 import { buildClient } from './buildClient'
 import { printBuildResult } from './buildCommon'
 
+const buildVerbosity = process.env.BUILD_VERBOSITY != null ? parseInt(process.env.BUILD_VERBOSITY) : 1
+
 buildClient().then(result => {
   const watcher = chokidar.watch(['./src/client', './src/common'])
 
-  // Being watching for client code changes
+  // Begin watching for client code changes
   watcher.on('ready', () => {
     console.log('Watching for changes...')
     watcher.on('all', () => {
@@ -14,7 +16,8 @@ buildClient().then(result => {
       // Rebuild client
       result.buildResult.rebuild().then(_result => {
         console.log('Done.')
-        printBuildResult(_result, startTime)
+        if (buildVerbosity > 0)
+          printBuildResult(_result, startTime)
         console.log('Watching for changes...')
       }).catch(err => console.log('BUILD ERROR: ', err))
     })

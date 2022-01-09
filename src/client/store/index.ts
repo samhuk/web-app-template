@@ -3,12 +3,14 @@ import thunkMiddleware from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware, connectRouter } from 'connected-react-router'
 import initStore from './init'
+import { healthCheckReducer } from './healthCheck/reducer'
 
 export const history = createBrowserHistory()
 
 // Set the root reducer. This defines the root state (see ./types.ts).
 export const rootReducer = combineReducers({
   router: connectRouter(history),
+  healthCheck: healthCheckReducer,
 })
 
 export const store = configureStore({

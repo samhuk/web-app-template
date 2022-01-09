@@ -2,13 +2,15 @@
 $primary-color: cyan;
 $secondary-color: #aaa;
 $primary-background: #222;
-$primary-text-color: #eee;
+$primary-text-color: #ddd;
 
 // Borders
 $standard-border: 1px solid $secondary-color;
 
 // Font
 $font-family: 'Roboto', sans-serif;
+
+$link-color: #91b9ff;
 
 html {
   height: 100vh;
@@ -19,18 +21,23 @@ body {
   color: $primary-text-color;
   background-color: $primary-background;
   font-family: $font-family;
-  font-size: 14px;
+  font-size: 20px;
   margin: 0;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a:visited {
+    text-decoration: none;
+    color: $link-color;
+  }
 }
 
 #root {
   height: 500px;
-  width: 500px;
+  max-width: 500px;
 }
 
 .header {
@@ -43,8 +50,8 @@ body {
   justify-content: center;
   padding: 0;
   margin: 0;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 
   .nav-item-wrapper {
     list-style: none;
@@ -60,7 +67,7 @@ body {
       border-radius: 5px;
 
       &.is-active {
-        background-color: #ccc;
+        background-color: lighten($primary-background, 5);
       }
     }
   }
@@ -72,14 +79,28 @@ body {
 
 .links {
   table {
-    border-collapse: collapse;
-    border-spacing: 0;
     width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+
+    tbody {
+      border-radius: 5px;
+      overflow: hidden;
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid #ccc;
+
+    &:first-child {
+      border-top: 1px solid #ccc;
+    }
   }
 
   td {
     padding: 10px;
-    border: 1px solid #ccc;
+    font-size: 18px;
   }
 
   .name-cell {

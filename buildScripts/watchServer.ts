@@ -15,7 +15,7 @@ buildServer().then(result => {
   // Start initial pre-rebuild server process
   startServer()
   const watcher = chokidar.watch(['./src/server', './src/common'])
-  // Being watching for server code changes
+  // Begin watching for server code changes
   watcher.on('ready', () => {
     console.log('Watching for changes...')
     watcher.on('all', () => {

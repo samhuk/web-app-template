@@ -12,7 +12,10 @@
     "build-prod": "npm run build-build && env-cmd -e prod node ./buildScripts/build/build.js",
     "watch-client-dev": "env-cmd -e dev node ./buildScripts/build/watchClient.js",
     "watch-server-dev": "env-cmd -e dev node ./buildScripts/build/watchServer.js",
-    "start": "npm run build-build && concurrently -n \"ui ,api\" -c \"cyan,blue\" \"npm run watch-client-dev\" \"npm run watch-server-dev\""
+    "watch-client-dev-zen": "env-cmd -e dev-zen node ./buildScripts/build/watchClient.js",
+    "watch-server-dev-zen": "env-cmd -e dev-zen node ./buildScripts/build/watchServer.js",
+    "start": "npm run build-build && concurrently -n \"ui ,api\" -c \"cyan,blue\" \"npm run watch-client-dev\" \"npm run watch-server-dev\"",
+    "start-zen": "npm run build-build && concurrently -n \"ui ,api\" -c \"cyan,blue\" \"npm run watch-client-dev-zen\" \"npm run watch-server-dev-zen\""
   },
   "author": "",
   "license": "MIT",
@@ -20,6 +23,7 @@
     "@reduxjs/toolkit": "^1.7.1",
     "@types/history": "^4.7.9",
     "@types/react-router": "^5.1.17",
+    "ajax": "^0.0.4",
     "concurrently": "^6.5.1",
     "connect-livereload": "^0.6.1",
     "connected-react-router": "^6.9.2",
@@ -35,7 +39,8 @@
     "react": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "redux-thunk": "^2.4.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.5.1"
   },
   "devDependencies": {
     "@types/connect-livereload": "^0.6.0",
