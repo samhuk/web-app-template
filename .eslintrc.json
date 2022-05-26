@@ -70,6 +70,15 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "error"
+    "@typescript-eslint/no-shadow": "error",
+    "react/no-array-index-key": "warn",
+    "class-methods-use-this": "off",
+    "react/jsx-max-props-per-line": "off",
+    "react/jsx-first-prop-new-line": "off",
+    "no-useless-constructor": "off",
+    "no-empty-function": "off",
+    "lines-between-class-members": "off",
+    "no-param-reassign": "warn",
+    "react/jsx-no-useless-fragment": "warn",
   }
 }

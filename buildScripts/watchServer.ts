@@ -1,36 +1,54 @@
 import chokidar from 'chokidar'
 import { ChildProcess, fork } from 'child_process'
 import { buildServer } from './buildServer'
-import { printBuildResult } from './buildCommon'
+import { CustomBuildResult, printBuildResult } from './buildCommon'
+import { watch } from 'chokidar-debounced'
 
-const SERVER_MODULE_PATH = './build/server/out.js'
+const SERVER_BUILD_OUTPUT_ENTRYPOINT_PATH = './build/server/out.js'
+const DIRS = ['./src/server', './src/common']
 
 let serverProc: ChildProcess = null
 
 const startServer = () => {
-  serverProc = fork(SERVER_MODULE_PATH, { env: { SERVER_PORT: '4001' } })
+  // Start server process with a custom debug port of 5003. This must be kept in-sync with launch.json
+  serverProc = fork(SERVER_BUILD_OUTPUT_ENTRYPOINT_PATH, { env: process.env, execArgv: ['--inspect=127.0.0.1:5003'] })
 }
 
-buildServer().then(result => {
-  // Start initial pre-rebuild server process
-  startServer()
-  const watcher = chokidar.watch(['./src/server', './src/common'])
-  // Begin watching for server code changes
-  watcher.on('ready', () => {
-    console.log('Watching for changes...')
-    watcher.on('all', () => {
-      // Kill existing server process
-      serverProc?.kill()
-      console.log(`Changes detected [${new Date().toLocaleTimeString()}], rebuilding server...`)
-      const startTime = Date.now()
-      // Rebuild server
-      result.buildResult.rebuild().then(_result => {
-        console.log('Done.')
-        printBuildResult(_result, startTime)
-        // Start server again
-        startServer()
-        console.log('Watching for changes...')
-      })
+const beginRebuildWatch = (buildResult: CustomBuildResult) => {
+  watch(() => {
+    // Kill existing server process
+    serverProc?.kill()
+    console.log(`Changes detected [${new Date().toLocaleTimeString()}], rebuilding server...`)
+    const startTime = Date.now()
+    // Rebuild server
+    buildResult.buildResult.rebuild().then(_result => {
+      console.log('Done.')
+      printBuildResult(_result, startTime)
+      // Start server again
+      startServer()
+      console.log('Watching for changes...')
+    }).catch(() => undefined) // Prevent from exiting the process
+  }, DIRS, 500, () => console.log('Watching for changes...'))
+}
+
+let initialBuildWatcher: chokidar.FSWatcher = null
+const main = () => {
+  // Try initial build attempt
+  buildServer()
+    // If initial build successful, start rebuild watch
+    .then(result => {
+      initialBuildWatcher?.close()
+      // Start initial server process, before the first rebuild
+      startServer()
+      beginRebuildWatch(result)
     })
-  })
-})
+    .catch(() => {
+      if (initialBuildWatcher != null)
+        return
+
+      initialBuildWatcher = chokidar.watch(DIRS)
+      watch(() => main(), initialBuildWatcher, 500, () => console.log('Watching for changes...'))
+    })
+}
+
+main()

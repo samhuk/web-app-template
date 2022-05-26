@@ -2,8 +2,6 @@ node_modules
 build
 buildScripts/build
 .DS_Store
-**/*webpack/*.js
-src/test/e2e/cypress/videos/**/*
 debug.log
 buildScripts/gzipper
 buildScripts/gzipper.exe

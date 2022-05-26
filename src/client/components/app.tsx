@@ -7,11 +7,10 @@ import Body from './body'
 // styles
 import '../assets/styles/standard.scss'
 
-export const App = () => (
-  <>
-    <Header title="TREE Starter" />
-    <Body />
-  </>
-)
+export const App = () => {
+  return (
+    <><Header /><Body /></>
+  )
+}
 
 export default App

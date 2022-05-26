@@ -40,6 +40,6 @@ Run `sh build-prod.sh` (or `build-prod.bat` if on Windows)
 
 Run `docker-compose up -d`
 
-Try navigating to localhost:8080.
+Try navigating to http://localhost:80 (for the client) or http://localhost:81/api/healthcheck (for the api).
 
 To stop the app, run `docker-compose down`

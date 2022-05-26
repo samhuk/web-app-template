@@ -4,7 +4,7 @@ import * as path from 'path'
 import { createBuilder } from './buildCommon'
 
 const prod = process.env.NODE_ENV === 'production'
-const ENTRYPOINT_PATH = './src/server/app.ts'
+const ENTRYPOINT_PATH = './src/server/index.ts'
 const OUTPUT_DIR = './build/server'
 const OUTPUT_JS_FILENAME = 'out.js'
 
@@ -53,6 +53,9 @@ export const buildServer = createBuilder('server', () => esbuild.build({
   metafile: true,
   incremental: !prod,
   platform: 'node',
-  external: ['livereload-js'],
+  external: ['livereload-js', 'pg-native'],
   plugins: [sassPlugin() as unknown as esbuild.Plugin, nativeNodeModulesPlugin],
+  loader: {
+    '.sql': 'text',
+  },
 }).then(result => ({ buildResult: result })))

@@ -1,0 +1,29 @@
+@import './borders.scss';
+@import './colors.scss';
+
+.root-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: $root-header-background-color;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+
+  .left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .title {
+      font-size: 38px;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 22px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

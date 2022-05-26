@@ -1,15 +1,10 @@
 import { applyMiddleware, combineReducers, configureStore } from '@reduxjs/toolkit'
 import thunkMiddleware from 'redux-thunk'
-import { createBrowserHistory } from 'history'
-import { routerMiddleware, connectRouter } from 'connected-react-router'
-import initStore from './init'
 import { healthCheckReducer } from './healthCheck/reducer'
-
-export const history = createBrowserHistory()
+import initStore from './init'
 
 // Set the root reducer. This defines the root state (see ./types.ts).
 export const rootReducer = combineReducers({
-  router: connectRouter(history),
   healthCheck: healthCheckReducer,
 })
 
@@ -19,9 +14,9 @@ export const store = configureStore({
   // Enable the redux devtools extension
   devTools: (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
   // Add thunk middleware for non-boilerplate async dispatching of actions
-  enhancers: [applyMiddleware(thunkMiddleware, routerMiddleware(history))],
+  enhancers: [applyMiddleware(thunkMiddleware)],
 })
 
-initStore(store)
+initStore(store.dispatch)
 
 export default store

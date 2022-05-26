@@ -5,6 +5,9 @@
     "../common",
     "./"
   ],
+  "exclude": [
+    "**/*.sql"
+  ],
   "compilerOptions": {
     "target": "es2017",
     "declaration": false,

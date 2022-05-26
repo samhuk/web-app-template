@@ -1,26 +1,31 @@
 {
   "configurations": [
     {
-      "name": "Launch dev via NPM",
-      "request": "launch",
-      "runtimeArgs": [
-        "run-script",
-        "start"
-      ],
-      "runtimeExecutable": "npm",
+      "name": "Attach client",
+      "type": "firefox",
+      "request": "attach",
+      "url": "http://localhost:4001/",
+      "webRoot": "/build/client",
+      "pathMappings": [
+        {
+          "url": "http://localhost:4001/src",
+          "path": "${workspaceFolder}/src"
+        }
+      ]
+    },
+    {
+      "name": "Attach server",
+      "port": 5003,
+      "request": "attach",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "type": "pwa-node"
     },
     {
-      "name": "Launch prod via NPM",
+      "name": "Start server",
+      "program": "./build/server/out.js",
       "request": "launch",
-      "runtimeArgs": [
-        "run-script",
-        "start-prod"
-      ],
-      "runtimeExecutable": "npm",
       "skipFiles": [
         "<node_internals>/**"
       ],

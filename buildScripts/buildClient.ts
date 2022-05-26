@@ -24,6 +24,11 @@ export const buildClient = createBuilder('client', () => esbuild.build({
   metafile: true,
   incremental: !prod,
   plugins: [sassPlugin() as unknown as esbuild.Plugin],
+  loader: {
+    '.ttf': 'file',
+    '.woff': 'file',
+    '.woff2': 'file',
+  },
 }).then(result => {
   // Create index.html file, referencing build outputs
   const indexHtmlFileText = createIndexHtmlFileText(result, INDEX_HTML_FILE_PATH, OUTPUT_DIR)

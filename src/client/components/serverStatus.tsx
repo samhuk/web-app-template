@@ -9,6 +9,10 @@ export const ServerStatus = () => {
   return (
     <div className="server-status">
       Server Status: {status ? '🟢' : '🔴'}
+      {statusError != null
+        ? `(${statusError})`
+        : null
+      }
     </div>
   )
 }

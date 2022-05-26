@@ -1,21 +1,15 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Nav from './nav'
+import { Routes, Route } from 'react-router-dom'
 import Home from './home'
-import Links from './links'
 
 export const render = () => (
-  <Router>
-    <div className="body-wrapper">
-      <div className="body">
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/links" element={<Links />} />
-        </Routes>
-      </div>
+  <div className="body-wrapper">
+    <div className="body">
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </div>
-  </Router>
+  </div>
 )
 
 export default render

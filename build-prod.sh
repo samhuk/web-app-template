@@ -10,7 +10,7 @@ cp -r ./build/server ./src/server
 mv ./src/client/client ./src/client/build
 mv ./src/server/server ./src/server/build
 # Build the docker services
-docker-compose build
+sudo docker-compose build
 # Remove all the build output files
 rm -r ./build
 rm -r ./buildScripts/build
