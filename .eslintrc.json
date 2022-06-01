@@ -79,6 +79,6 @@
     "no-empty-function": "off",
     "lines-between-class-members": "off",
     "no-param-reassign": "warn",
-    "react/jsx-no-useless-fragment": "warn",
+    "react/jsx-no-useless-fragment": "warn"
   }
 }
