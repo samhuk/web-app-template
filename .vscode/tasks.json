@@ -1,0 +1,9 @@
+{
+  "tasks": [
+    {
+      "label": "unitTestsDebugPreLaunchTask",
+      "type": "shell",
+      "command": "npm run build-unit-tests"
+    }
+  ]
+}

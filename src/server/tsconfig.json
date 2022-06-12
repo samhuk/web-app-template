@@ -9,7 +9,6 @@
     "**/*.sql"
   ],
   "compilerOptions": {
-    "target": "es2017",
     "declaration": false,
     "sourceMap": false,
     "noEmit": false,
