@@ -7,15 +7,37 @@
     "plugin:react/recommended",
     "airbnb"
   ],
-  "ignorePatterns": ["node_modules", "build", "package.json", "package.lock.json", ".env-cmdrc.json"],
+  "ignorePatterns": [
+    "node_modules/**/*",
+    "build/**/*",
+    "build-test/**/*",
+    "import/**/*",
+    "content/**/*",
+    "pgdata/**/*",
+    "package.lock.json",
+    "nginx.conf",
+    "LICENSE",
+    "Dockerfile",
+    "*.yaml",
+    "*.go",
+    "*.sh",
+    "*.md",
+    "*.sql",
+    "*.json",
+    "*.scss",
+    "*.html",
+    "*.ico",
+    "*.ttf",
+    "*.woff2",
+    "*.txt",
+    "*.env",
+    "*.md",
+    "*.bat"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": 13,
-    "sourceType": "module",
-    "project": "./src/client/tsconfig.json"
+    "sourceType": "module"
   },
   "plugins": [
     "react",
@@ -33,18 +55,7 @@
     "prefer-destructuring": "off",
     "import/extensions": "off",
     "radix": "off",
-    "object-curly-newline": [1, {
-      "ObjectExpression": {
-        "multiline": true
-      },
-      "ObjectPattern": {
-        "multiline": true
-      },
-      "ImportDeclaration": "never",
-      "ExportDeclaration": {
-        "multiline": true
-      }
-    }],
+    "object-curly-newline": "off",
     "react/function-component-definition": [2, {
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
@@ -52,10 +63,11 @@
     "comma-dangle": ["error", "always-multiline"],
     "nonblock-statement-body-position": ["error", "any"],
     "curly": ["error", "multi-or-nest", "consistent"],
-    "max-len": [2, 150],
+    "max-len": ["error", { "code": 150, "ignoreTemplateLiterals": true }],
     "react/jsx-filename-extension": [1, {
       "extensions": [".ts", ".tsx"]
     }],
+    "react/require-default-props": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "no-undef": "off",
     "no-unused-vars": "off",
@@ -79,6 +91,8 @@
     "no-empty-function": "off",
     "lines-between-class-members": "off",
     "no-param-reassign": "warn",
-    "react/jsx-no-useless-fragment": "warn"
+    "react/jsx-no-useless-fragment": "warn",
+    "object-shorthand": ["error", "properties"],
+    "space-before-function-paren": "off"
   }
 }

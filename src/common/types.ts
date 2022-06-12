@@ -2,7 +2,7 @@ export type Dict<T = any> = { [key: string]: T }
 
 /**
  * For creating types like:
- * 
+ *
  * @example
  * enum Type { STRING, NUMBER }
  * type Map = {
@@ -20,15 +20,15 @@ export type Dict<T = any> = { [key: string]: T }
 export type TypeDependantBase<
   TType extends string|number,
   TMap extends { [k in TType]: any },
-  TTypePropertyName extends string = "type",
-  TTypeOptionsPropertyName extends string = "typeOptions"
+  TTypePropertyName extends string = 'type',
+  TTypeOptionsPropertyName extends string = 'typeOptions'
 > = {
   [K in TType]: { [k in TTypePropertyName]: K } & { [k in TTypeOptionsPropertyName]: TMap[K] }
 }[TType] & { [k in TTypePropertyName]: TType }
 
 /**
  * For creating types like:
- * 
+ *
  * @example
  * enum Type { STRING, NUMBER }
  * type Map = {
@@ -44,7 +44,7 @@ export type TypeDependantBase<
 export type TypeDependantBaseIntersection<
   TType extends string|number,
   TMap extends { [k in TType]: any },
-  TTypePropertyName extends string = "type",
+  TTypePropertyName extends string = 'type',
 > = {
   [K in TType]: { [k in TTypePropertyName]: K } & TMap[K]
 }[TType] & { [k in TTypePropertyName]: TType }

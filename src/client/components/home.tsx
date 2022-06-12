@@ -3,7 +3,7 @@ import { ServerStatus } from './serverStatus'
 
 export const Home = () => (
   <div className="home">
-    <i className="fas fa-flask"></i>
+    <i className="fas fa-flask" />
     <div>Welcome to tree-starter</div>
     <ServerStatus />
     <div className="links">

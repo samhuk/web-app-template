@@ -8,9 +8,10 @@ A starter for a react-redux & expressjs web application.
 Notable technologies used:
 * Typescript, 100%
 * React (with Redux)
+* SCSS
 * ExpressJS
 * ESBuild
-* SCSS
+* ESLint
 * Docker
 * Go
 * NGINX
@@ -18,7 +19,7 @@ Notable technologies used:
 Notable features:
 * Ultra fast hot reloading
 * Development and production modes (prod using Docker)
-* Gzip enabled in production mode
+* Gzip in production mode
 
 ## Development Deployment
 
@@ -28,7 +29,7 @@ Run `npm i`
 
 Run `npm start`
 
-Try navigating to localhost:4001.
+Try navigating to http://localhost:4001
 
 ## Production Deployment
 

@@ -36,7 +36,7 @@ export const pushToArrayOfPropertyName = <T extends any>(dict: { [k: string]: T[
 
 export const mapDict = <T extends any, R extends any>(
   dict: { [k: string]: T },
-  map: (item: T, key: string, i: number) => R
+  map: (item: T, key: string, i: number) => R,
 ) => {
   const mapped: { [key: string]: R } = {}
   let i = 0

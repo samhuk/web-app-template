@@ -11,8 +11,7 @@ export const ServerStatus = () => {
       Server Status: {status ? '🟢' : '🔴'}
       {statusError != null
         ? `(${statusError})`
-        : null
-      }
+        : null}
     </div>
   )
 }

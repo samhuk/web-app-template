@@ -16,6 +16,7 @@ const initialState: HealthCheckState = {
 }
 
 export const healthCheckReducer = (
+  // eslint-disable-next-line default-param-last
   state = initialState,
   action: HealthCheckActions,
 ): HealthCheckState => {
@@ -23,7 +24,7 @@ export const healthCheckReducer = (
     case FETCH_HEALTH_CHECK_STATUS:
       return {
         ...state,
-        fetchingState: FetchingStateBase.FETCHING
+        fetchingState: FetchingStateBase.FETCHING,
       }
     case HEALTH_CHECK_STATUS_FETCHED:
       return {
