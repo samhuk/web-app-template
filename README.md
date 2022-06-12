@@ -55,12 +55,6 @@ Run `npm run lint` to lint all the source according to the rules within `.eslint
 
 `.vscode/launch.json` features 3 debug tasks.
 
-## Type Checking
-
-The hot-reloading watch tasks in package.json use ESBuild to achieve the fast hot-reloading. ESBuild only removes the non-javascript part of typescript, and does not check the validity of the non-javascript (e.g. type declarations, etc.) part of the typescript codebase.
-
-This "type-checking" can be achieved separately via running `npm run build-tsc`, which uses `tsc` to build the typescript code, which _does_ perform full type-checking.
-
 ### Client
 
 To debug the client, either a browser's native developer window can be used, or, if Firefox is being used, the _Attach Client_ debug task can be ran which attaches VSCode to the currently-active open instance of the client. Firefox has to be specifically configured to achieve this.
@@ -72,6 +66,12 @@ To debug the NodeJS server, the node process can be attached to by VSCode with t
 ### Unit Tests
 
 To debug the Jest unit tests, they can be built and launched with the _Run Unit Tests_ debug task.
+
+## Type Checking
+
+The hot-reloading watch tasks in package.json use ESBuild to achieve the fast hot-reloading. ESBuild only removes the non-javascript part of typescript, and does not check the validity of the non-javascript (e.g. type declarations, etc.) part of the typescript codebase.
+
+This "type-checking" can be achieved separately via running `npm run build-tsc`, which uses `tsc` to build the typescript code, which _does_ perform full type-checking.
 
 ## Production Deployment
 
