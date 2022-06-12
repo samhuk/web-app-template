@@ -5,9 +5,12 @@
 
 A template react-redux & expressjs web application using ESLint, Typescript, Jest, Docker, and more.
 
+## Usage
+
 This is useful as a template repository to get started making your web application faster, or as a reference for how modern web development technologies can be used, and how they can make for a great developer experience when combined.
 
-Notable technologies used:
+## Technologies
+
 * Typescript, 100%
 * React
 * Redux
@@ -20,10 +23,11 @@ Notable technologies used:
 * Go
 * NGINX
 
-Notable features:
+## Notable Features
 * Ultra fast hot reloading
 * Development and production modes (prod using Docker)
 * Gzip in production mode
+* ...
 
 ## Development Deployment
 
