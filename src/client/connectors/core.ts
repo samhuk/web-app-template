@@ -31,7 +31,7 @@ export const get = <TResponseData>(
     method: 'GET',
     headers,
     responseType,
-    timeout: 8000,
+    timeout: 10000,
     withCredentials: true,
   }).pipe(
     map(res => (res as AjaxResponse<ResponseBase<TResponseData>>).response),
@@ -65,7 +65,7 @@ export const post = <TResponseData>(
     headers,
     responseType,
     body: JSON.stringify(body),
-    timeout: 8000,
+    timeout: 10000,
     withCredentials: true,
   }).pipe(
     map(res => (res as AjaxResponse<ResponseBase<TResponseData>>).response),

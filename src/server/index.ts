@@ -8,8 +8,6 @@ import { env } from './env'
 import { sendErrorResponse } from './api/responses'
 import { notFound } from './api/errorVariants'
 
-/* eslint-disable no-console */
-
 const app = express()
 
 // Hot-reloading

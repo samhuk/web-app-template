@@ -12,6 +12,9 @@ services:
     user: node
     build:
       context: ./src/server
+    volumes:
+      - ./import:/import
+      - ./content:/content
     env_file:
       - ./prod.env
     ports:

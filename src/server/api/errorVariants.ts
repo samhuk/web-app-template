@@ -40,14 +40,29 @@ const createServerErrorErrorData = (message?: string): ErrorData => ({
   data: message,
 })
 
+/**
+ * @example throw notFound('user not found')
+ */
 export const notFound = (message?: string): Error => createError(createNotFoundErrorData(message))
 
+/**
+ * @example throw invalidRequest('tshirt size should be number')
+ */
 export const invalidRequest = (message?: string): Error => createError(createInvalidRequestErrorData(message))
 
+/**
+ * @example throw serviceTimeout('A service timed out')
+ */
 export const serviceTimeout = (serviceName: string, timeoutSeconds: number): Error => (
   createError(createServiceTimeoutErrorData(serviceName, timeoutSeconds))
 )
 
+/**
+ * @example throw unauthorized('Your account does not have access to this feature')
+ */
 export const unauthorized = (message?: string): Error => createError(createUnauthorizedErrorData(message))
 
+/**
+ * @example throw serverError('The server encountered an unexpected error')
+ */
 export const serverError = (message?: string): Error => createError(createServerErrorErrorData(message))

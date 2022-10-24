@@ -3,7 +3,22 @@
     {
       "label": "unitTestsDebugPreLaunchTask",
       "type": "shell",
-      "command": "npm run build-unit-tests"
+      "command": "npm run build-unit-tests",
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
+    },
+    {
+      "label": "buildServerDev",
+      "type": "shell",
+      "command": "npm run build-server-dev",
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      }
     }
   ]
 }

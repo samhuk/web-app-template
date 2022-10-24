@@ -1,5 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
+  "include": [
+    "./src/**/*",
+    "./build/**/*"
+  ],
 	"compilerOptions": {
     "target": "es6",
     "moduleResolution": "node",
@@ -10,7 +14,6 @@
 		"isolatedModules": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
     "sourceMap": true,
     "experimentalDecorators": true,
     "skipLibCheck": true
