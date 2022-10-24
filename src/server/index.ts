@@ -3,7 +3,7 @@ import path from 'path'
 import * as fs from 'fs'
 import cookieParser from 'cookie-parser'
 import api from './api'
-import { addHotReloadingMiddleware, addRequestDelayMiddlewareIfSpecified } from './appFeatures'
+import { addHotReloadingMiddleware } from './appFeatures'
 import { env } from './env'
 import { sendErrorResponse } from './api/responses'
 import { notFound } from './api/errorVariants'
@@ -13,10 +13,6 @@ const app = express()
 // Hot-reloading
 if (!env.isProd)
   addHotReloadingMiddleware(app)
-
-// API request throttling (for simulating slow requests)
-if (!env.isProd)
-  addRequestDelayMiddlewareIfSpecified(app)
 
 app.use(cookieParser())
 
