@@ -64,7 +64,7 @@
     "@typescript-eslint/parser": "^5.40.0",
     "babel-jest": "^29.1.2",
     "env-cmd": "^10.1.0",
-    "esdar": "^0.0.1-beta.4",
+    "esdar": "^0.0.4",
     "eslint": "^8.25.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
