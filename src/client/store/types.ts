@@ -2,13 +2,13 @@ import store, { rootReducer } from '.'
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export type RootDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch
 
 export type Store = typeof store
 
-// eslint-disable-next-line no-shadow
-export enum FetchingStateBase {
+export enum LoadingState {
   IDLE = 'idle',
   FETCHING = 'fetching',
+  SENDING = 'sending',
   FAILED = 'failed',
 }

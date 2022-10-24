@@ -1,5 +1,3 @@
-import { buildClient } from './buildClient'
-import { buildServer } from './buildServer'
+import { buildClient, buildServer } from '.'
 
-// Build client then server
 buildClient().then(() => buildServer())

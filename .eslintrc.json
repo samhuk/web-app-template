@@ -32,7 +32,8 @@
     "*.txt",
     "*.env",
     "*.md",
-    "*.bat"
+    "*.bat",
+    "*.js"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

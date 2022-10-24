@@ -15,11 +15,11 @@
       "name": "Attach Client",
       "type": "firefox",
       "request": "attach",
-      "url": "http://localhost:4001/",
+      "url": "http://localhost:8080/",
       "webRoot": "/build/client",
       "pathMappings": [
         {
-          "url": "http://localhost:4001/src",
+          "url": "http://localhost:8080/src",
           "path": "${workspaceFolder}/src"
         }
       ]
@@ -34,12 +34,13 @@
       "type": "pwa-node"
     },
     {
-      "name": "Start Built Server",
+      "name": "Start Server",
       "program": "./build/server/out.js",
       "request": "launch",
       "skipFiles": [
         "<node_internals>/**"
       ],
+      "preLaunchTask": "buildServerDev",
       "type": "pwa-node"
     }
   ]

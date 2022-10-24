@@ -1,10 +1,5 @@
 :: Build all the services
 call npm run build-prod
-:: Gzip
-call npm run build-gzipper
-timeout 1
-move .\buildScripts\gzipper.exe .\buildScripts\build
-start .\buildScripts\build\gzipper.exe
 timeout 1
 :: Move over build output files to the corresponding src directory
 move /Y .\build\client .\src\client\build

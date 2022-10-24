@@ -1,5 +1,6 @@
 import cors from 'cors'
 import { json, Router } from 'express'
+import { HealthcheckStatus } from '../../common/responses'
 import { sendSuccessResponse } from './responses'
 
 const startTime = new Date()
@@ -10,12 +11,13 @@ const router = Router()
   .use(json())
   .use('/healthcheck', (req, res) => {
     const upTime = Date.now() - startTimeUnixOffset
-    sendSuccessResponse(req, res, {
-      startTime,
+    const status: HealthcheckStatus = {
+      startTime: startTime.toLocaleString(),
       startTimeUnixOffset,
       upTimeMs: upTime,
       upTimeHours: upTime / 1000 / 60 / 60,
-    })
+    }
+    sendSuccessResponse(req, res, status)
   })
 
 export default router

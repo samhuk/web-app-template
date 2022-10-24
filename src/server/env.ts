@@ -1,33 +1,13 @@
-export type EnvDisplaySettings = {
-  /**
-   * True to show the env display.
-   */
-  show: boolean
-  /**
-   * Env name.
-   */
-  name: string
-  /**
-   * The color of the env name.
-   */
-  textColor: string
-  /**
-   * Background color of the env name box.
-   */
-  backgroundColor: string
-  /**
-   * Description of the env.
-   */
-  description: string
-}
-
-export type IEnv = {
+export type Env = {
   isProd: boolean
   /**
    * The port the server is hosted on. Default: `8080`
    */
   port: number
 }
+
+const isProd = process.env.NODE_ENV === 'production'
+const SECRET_KEYWORD = '{DEFINE}'
 
 const getEnvironmentVariableNumber = (
   envVarName: string,
@@ -39,6 +19,10 @@ const getEnvironmentVariableNumber = (
   const _invalidMessage = invalidMessage != null ? ` ${invalidMessage}` : ''
 
   const envVar = process.env[envVarName]
+
+  if (isProd && envVar === SECRET_KEYWORD)
+    throw new Error(`Encountered fatal error while getting environment variable "${envVarName}": Has been left as "${SECRET_KEYWORD}", which indicates that it's likely a production secret.`)
+
   if (envVar == null && defaultValue == null) {
     console.warn(`Environment variable ${envVarName} is not defined.${_notProvidedMessage}.`)
     return null
@@ -70,6 +54,9 @@ const getEnvironmentVariableBoolean = (
 
   const envVar = process.env[envVarName]
 
+  if (isProd && envVar === SECRET_KEYWORD)
+    throw new Error(`Encountered fatal error while getting environment variable "${envVarName}": Has been left as "${SECRET_KEYWORD}", which indicates that it's likely a production secret.`)
+
   if (envVar == null && defaultValue == null) {
     console.warn(`Environment variable ${envVarName} is not defined.${_notProvidedMessage}.`)
     return null
@@ -100,6 +87,9 @@ const getEnvironmentVariableString = (
   const _notProvidedMessage = notProvidedMessage != null ? ` ${notProvidedMessage}` : ''
   const envVar = process.env[envVarName]
 
+  if (isProd && envVar === SECRET_KEYWORD)
+    throw new Error(`Encountered fatal error while getting environment variable "${envVarName}": Has been left as "${SECRET_KEYWORD}", which indicates that it's likely a production secret.`)
+
   if (envVar == null && defaultValue == null) {
     console.warn(`Environment variable ${envVarName} is not defined.${_notProvidedMessage}.`)
     return null
@@ -112,7 +102,9 @@ const getEnvironmentVariableString = (
   return envVar
 }
 
-export const env: IEnv = {
-  isProd: process.env.NODE_ENV === 'production',
+const getEnv = (): Env => ({
+  isProd,
   port: getEnvironmentVariableNumber('SERVER_PORT', 8080),
-}
+})
+
+export const env: Env = getEnv()
