@@ -98,24 +98,6 @@ const replaceTokensInFiles = (filePaths, tokenMap) => new Promise((res, rej) => 
   _replaceTokensInFiles(filePaths, tokenMapEntries, 0, res)
 })
 
-const renameDirsAndFiles = (
-  dashCaseAppName,
-  camelCaseAppName,
-) => {
-  console.log('\n==> Renaming some directories and files...')
-  const paths = [
-    './src/app-name',
-    './src/demo/client/components/showcase/appName.tsx',
-    './src/demo/client/components/common/generic/appName.tsx',
-  ]
-  console.log(`--> ${paths[0]}`)
-  fs.renameSync(paths[0], `./src/${dashCaseAppName}`)
-  console.log(`--> ${paths[1]}`)
-  fs.renameSync(paths[1], `./src/demo/client/components/showcase/${camelCaseAppName}.tsx`)
-  console.log(`--> ${paths[2]}`)
-  fs.renameSync(paths[2], `./src/demo/client/components/common/generic/${camelCaseAppName}.tsx`)
-}
-
 const npmInstall = () => new Promise((res, rej) => {
   console.log('==> Installing npm dependencies...')
   exec('npm i', err => {
@@ -162,26 +144,11 @@ const main = async () => {
   ]
 
   const filePathsWithNonDoubleDashTokens = [
-    './src/index.ts',
-    './src/types.ts',
-    './src/app-name/types.ts',
-    './src/app-name/index.ts',
-    './src/app-name/styles/index.scss',
-    './src/app-name/index.spec.ts',
-    './src/demo/client/components/showcase/index.tsx',
-    './src/demo/client/components/showcase/appName.tsx',
-    './src/demo/client/components/common/generic/appName.tsx',
-    './src/demo/client/components/header/index.tsx',
-    './src/demo/client/components/body.tsx',
-    './src/demo/client/components/app.tsx',
-    './buildScripts/buildComponentStyles.ts',
-    './buildScripts/watchClient.ts',
+    './src/client/components/app.tsx'
   ]
 
   await replaceTokensInFiles(filePathsWithDoubleDashTokens, doubleDashedTokenMap)
   await replaceTokensInFiles(filePathsWithNonDoubleDashTokens, nonDoubleDashedTokenMap)
-
-  renameDirsAndFiles(dashCaseAppName, camelCaseAppName)
 
   await npmInstall()
 
